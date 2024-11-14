@@ -19,7 +19,7 @@ export default async function SeasonalSections() {
     );
 }
 
-export function CardsWrapper({media_type, data}:{media_type: string, data: AnimeData[]}) {  
+export function CardsWrapper({media_type, data = []}:{media_type: string, data: AnimeData[]}) {  
     return(
         <div>
             <h1 className="text-xl text-center uppercase">{media_type}</h1>
