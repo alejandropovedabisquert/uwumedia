@@ -4,7 +4,7 @@ import { AnimeData } from "@/app/lib/definitions";
 
 export default async function SeasonalSections() {
     const seasonalList = await fetchSeasonalAnime();
-    // console.log(seasonalList.data[0]);
+    console.log(seasonalList.data);
     return (
         <>
                 <CardsWrapper media_type="tv" data={seasonalList.data}/>
