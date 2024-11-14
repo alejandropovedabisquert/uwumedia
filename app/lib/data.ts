@@ -6,10 +6,10 @@ export async function fetchSeasonalAnime() {
                 'X-MAL-CLIENT-ID': process.env.X_MAL_CLIENT_ID!
             }
         });
-        let data = await response.json()
+        const data = await response.json()
         
         return data;
     } catch (error) {
-        throw new Error('Failed to fetch seasonal anime data.');
+        throw new Error('Failed to fetch seasonal anime data.' + error);
     }
 }

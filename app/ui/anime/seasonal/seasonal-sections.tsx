@@ -1,5 +1,6 @@
 import { fetchSeasonalAnime } from "@/app/lib/data";
 import styles from "./seasonal-sections.module.scss"
+import { AnimeData } from "@/app/lib/definitions";
 
 export default async function SeasonalSections() {
     const seasonalList = await fetchSeasonalAnime();
@@ -18,12 +19,12 @@ export default async function SeasonalSections() {
     );
 }
 
-export function CardsWrapper({media_type, data}:{media_type: string, data: any}) {  
+export function CardsWrapper({media_type, data}:{media_type: string, data: AnimeData[]}) {  
     return(
         <div>
             <h1 className="text-xl text-center uppercase">{media_type}</h1>
             <div className={`${styles.cards}`}>
-                {data.map((list: any) =>{
+                {data.map((list) =>{
                     return list.node.media_type == media_type? (
                         <Card data={list}/>
                     ): null
@@ -33,7 +34,7 @@ export function CardsWrapper({media_type, data}:{media_type: string, data: any})
     )
 }
 
-export function Card({data}:{data: any}) {
+export function Card({data}:{data: AnimeData }) {
 
     return(
         <div className="max-w-sm w-full lg:max-w-md lg:flex">
