@@ -6,6 +6,7 @@ export type AnimePicture = {
   
   // Define el tipo para cada nodo de anime en la lista
   export type AnimeNode = {
+    id: number;
     media_type: string;
     main_picture: AnimePicture;
     title: string;

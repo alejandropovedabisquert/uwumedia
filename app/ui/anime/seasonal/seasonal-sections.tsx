@@ -26,7 +26,7 @@ export function CardsWrapper({media_type, data}:{media_type: string, data: Anime
             <div className={`${styles.cards}`}>
                 {data.map((list) =>{
                     return list.node.media_type == media_type? (
-                        <Card data={list}/>
+                        <Card key={list.node.id} data={list}/>
                     ): null
                 })}
             </div>
