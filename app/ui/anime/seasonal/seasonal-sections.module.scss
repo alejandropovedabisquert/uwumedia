@@ -1,0 +1,9 @@
+.cards{
+    @apply flex flex-wrap justify-evenly
+}
+.card{
+    @apply max-w-xs w-full rounded overflow-hidden shadow-lg my-4 relative
+}
+.title_container{
+    @apply absolute bottom-0 w-full bg-white
+}
