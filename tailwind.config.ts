@@ -8,9 +8,19 @@ export default {
   ],
   theme: {
     extend: {
+      gridTemplateColumns: {
+        'title': '1fr auto 1fr',
+        'about': '.1fr auto 1fr'
+      },
+      gridTemplateRows: {
+        'title': '16px 0'
+      },
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        'primary-color': '#FF844B',
+        'secondary-color': '#ED9200',
+        'tertiary-color': '#12C036',
       },
     },
   },
