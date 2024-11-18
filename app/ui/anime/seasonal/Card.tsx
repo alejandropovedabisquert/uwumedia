@@ -1,53 +1,23 @@
-import { fetchSeasonalAnime } from "@/app/lib/data";
-import styles from "./seasonal-sections.module.scss"
 import { AnimeData, AnimeGenre } from "@/app/lib/definitions";
 import { formatDate, secondsToMinutes } from "@/app/lib/utils";
 import { FaStar } from "react-icons/fa6";
 
-export default async function SeasonalSections() {
-    const seasonalList = await fetchSeasonalAnime();
-    console.log(seasonalList.data);
-    return (
-        <>
-                <CardsWrapper media_type="tv" data={seasonalList.data}/>
-                <CardsWrapper media_type="ona" data={seasonalList.data}/>
-                <CardsWrapper media_type="ova" data={seasonalList.data}/>
-                <CardsWrapper media_type="movie" data={seasonalList.data}/>
-                <CardsWrapper media_type="special" data={seasonalList.data}/>
-                <CardsWrapper media_type="tv_special" data={seasonalList.data}/>
-                <CardsWrapper media_type="pv" data={seasonalList.data}/>
-                <CardsWrapper media_type="music" data={seasonalList.data}/>
-        </>
-    );
-}
-
-export function CardsWrapper({media_type, data = []}:{media_type: string, data: AnimeData[]}) {  
-    return(
-        <div>
-            <h1 className="uppercase text-2xl font-semibold md:text-3xl tracking-widest grid grid-cols-title grid-rows-title gap-6 before:content-[''] after:content-[''] before:block after:block before:border-b-2 after:border-b-2 before:border-secondary-color after:border-secondary-color w-full md:w-7/12 mx-auto mb-4">{media_type}</h1>
-            <div className={`${styles.cards}`}>
-                {data.map((list) =>{
-                    return list.node.media_type == media_type? (
-                        <Card key={list.node.id} data={list}/>
-                    ): null
-                })}
-            </div>
-        </div>
-    )
-}
-
 export function Card({data}:{data: AnimeData }) {
-    const image = data.node.main_picture.large;
-    const start_date = data.node.start_date;
-    const num_episodes = data.node.num_episodes
-    const average_episode_duration = data.node.average_episode_duration;
-    const title = data.node.title;
-    const genres = data.node.genres;
-    const mean = data.node.mean;
+    const {
+        main_picture: { large: image },
+        start_date,
+        num_episodes,
+        average_episode_duration,
+        title,
+        genres,
+        mean,
+        nsfw,
+        rating
+    } = data.node;
     return(
         <article className="relative w-full max-w-[45%] md:max-w-md mb-4 md:mb-12 mx-0">
             {
-                data.node.nsfw == "gray" && data.node.rating == "rx" ? 
+                nsfw == "gray" && rating == "rx" ? 
                     <div className="z-10 absolute w-fit -top-1 sm:-top-2 md:-top-4 -left-3 sm:-left-4 md:-left-8 bg-red-500 text-xs md:text-base text-white rounded-[100%] p-2 md:p-4 -rotate-45">NSFW</div>
                 : null
             }  
@@ -77,7 +47,6 @@ export function Card({data}:{data: AnimeData }) {
         </article>
     )
 }
-
 export function Genres({genres} : {genres: AnimeGenre[]} ){    
     return(
         <>
