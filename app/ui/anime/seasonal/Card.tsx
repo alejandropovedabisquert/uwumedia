@@ -1,12 +1,16 @@
 import { AnimeData, AnimeGenre } from "@/app/lib/definitions";
 import { createSlug, formatDate, secondsToMinutes } from "@/app/lib/utils";
+import Image from "next/image";
 import Link from "next/link";
 import { FaStar } from "react-icons/fa6";
 
 export function Card({data}:{data: AnimeData }) {
     const {
         id,
-        main_picture: { large: image },
+        main_picture: { 
+            // large: image_large, 
+            medium: image_medium 
+        },
         start_date,
         num_episodes,
         average_episode_duration,
@@ -25,7 +29,7 @@ export function Card({data}:{data: AnimeData }) {
             }  
             <Link href={`/anime/${id}/${createSlug(title)}`}>
                 <div className="group relative isolate flex flex-col justify-end overflow-hidden rounded-2xl h-60 md:h-96 px-4 md:px-8 pb-4 md:pb-8 pt-40">
-                    <img src={image} className="absolute inset-0 h-full w-full object-cover object-top transition-all duration-500 group-hover:scale-125"/>
+                    <Image src={image_medium} alt={title} className="absolute inset-0 h-full w-full object-cover object-top transition-all duration-500 group-hover:scale-125" fill/>
                     <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/40"></div>
                     <div className="z-10 top-0 right-0 absolute bg-primary-color flex flex-wrap py-2 px-4 rounded-bl-2xl">
                         <div className="text-sm text-white flex">
@@ -36,16 +40,13 @@ export function Card({data}:{data: AnimeData }) {
                         </div>
                     </div>
                     <h3 className="z-10 mt-3 text-sm md:text-lg font-bold text-white">{title}</h3>
-                    <div className="flex-wrap gap-x-2 hidden md:flex">
-
-                </div>
-                <div className="flex flex-wrap">
-                    <Genres genres={genres}/> 
-                    <div className="z-10 w-fit overflow-hidden text-sm leading-6 text-gray-300 ml-2 flex items-center">
-                        <FaStar className="mr-1" />
-                        {mean == null ? "N/A" : mean}
+                    <div className="flex flex-wrap">
+                        <Genres genres={genres}/> 
+                        <div className="z-10 w-fit overflow-hidden text-sm leading-6 text-gray-300 ml-2 flex items-center">
+                            <FaStar className="mr-1" />
+                            {mean == null ? "N/A" : mean}
+                        </div>
                     </div>
-                </div>
                 </div> 
             </Link>      
         </article>

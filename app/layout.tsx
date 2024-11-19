@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import Image from "next/image";
+import HeaderNavLinks from "./ui/header-nav-links";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -28,6 +30,16 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <header>
+          <Image className="m-auto" src='/logos/logo-primary.svg' alt="Logo UwUmedia" width={500} height={200} priority/>
+          <div className="bg-white border-y-secondary-color border-4 w-full">
+            <div className="max-w-screen-2xl m-auto">
+              <div className="flex flex-wrap">
+                <HeaderNavLinks/>
+              </div>
+            </div>
+          </div>
+        </header>
         {children}
       </body>
     </html>
