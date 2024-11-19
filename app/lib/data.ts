@@ -13,3 +13,19 @@ export async function fetchSeasonalAnime() {
         throw new Error('Failed to fetch seasonal anime data.' + error);
     }
 }
+
+export async function fetchAnimeById(id: number) {
+    try {
+        const response = await fetch(`https://api.myanimelist.net/v2/anime/${id}`, {
+            method: 'GET', // Method is optional because GET is the default
+            headers: {
+                'X-MAL-CLIENT-ID': process.env.X_MAL_CLIENT_ID!
+            }
+        });
+        const data = await response.json()
+        
+        return data;
+    } catch (error) {
+        throw new Error('Failed to fetch seasonal anime data.' + error);
+    }
+}
