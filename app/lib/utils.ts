@@ -15,3 +15,14 @@ export const secondsToMinutes = (seconds: number): string => {
     const minutes = Math.floor(seconds / 60);
     return `${minutes}`;
 };
+
+export function createSlug(text: string): string {
+    return text
+      .toString() // Asegurarse de que el texto es una cadena
+      .normalize('NFD') // Descomponer los caracteres acentuados en sus componentes
+      .replace(/[\u0300-\u036f]/g, '') // Eliminar los acentos
+      .trim() // Eliminar espacios al inicio y al final
+      .replace(/\s+/g, '_') // Reemplazar espacios con guiones
+      .replace(/[^\w\-]+/g, '') // Eliminar todos los caracteres que no sean palabras o guiones
+      .replace(/\-\-+/g, ''); // Reemplazar múltiples guiones con uno solo
+  }
