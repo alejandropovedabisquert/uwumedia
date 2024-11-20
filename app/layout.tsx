@@ -40,7 +40,9 @@ export default function RootLayout({
             </div>
           </div>
         </header>
-        {children}
+        <main className="max-w-screen-2xl m-auto">
+          {children}
+        </main>
       </body>
     </html>
   );
