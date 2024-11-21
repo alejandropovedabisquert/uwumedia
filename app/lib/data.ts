@@ -10,7 +10,8 @@ export async function fetchSeasonalAnime() {
         const response = await fetch("https://api.myanimelist.net/v2/anime/season/2024/fall?limit=500&nsfw=true&fields=id,title,main_picture,start_date,mean,nsfw,media_type,genres,num_episodes,average_episode_duration", {
             method: 'GET', // Method is optional because GET is the default
             headers: {
-                'X-MAL-CLIENT-ID': process.env.X_MAL_CLIENT_ID!
+                'X-MAL-CLIENT-ID': process.env.X_MAL_CLIENT_ID!,
+                'X-Accel-Buffering': 'no',
             }
         });
         const data = await response.json()
