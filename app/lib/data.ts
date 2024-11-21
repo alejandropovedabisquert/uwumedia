@@ -11,8 +11,6 @@ export async function fetchSeasonalAnime() {
             method: 'GET', // Method is optional because GET is the default
             headers: {
                 'X-MAL-CLIENT-ID': process.env.X_MAL_CLIENT_ID!,
-                'X-Accel-Buffering': 'no',
-                cache: 'no-store'
             }
         });
         const data = await response.json()
