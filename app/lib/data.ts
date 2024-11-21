@@ -12,6 +12,7 @@ export async function fetchSeasonalAnime() {
             headers: {
                 'X-MAL-CLIENT-ID': process.env.X_MAL_CLIENT_ID!,
                 'X-Accel-Buffering': 'no',
+                cache: 'no-store'
             }
         });
         const data = await response.json()
