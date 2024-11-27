@@ -1,5 +1,5 @@
 import { fetchAnimeById } from "@/app/lib/data";
-import { Related, RelatedAnimeData } from "@/app/lib/definitions";
+import { RelatedAnimeData } from "@/app/lib/definitions";
 import { replaceLineBreak } from "@/app/lib/utils";
 import { Titulo } from "@/app/ui/Titulo";
 import Image from "next/image";
@@ -143,13 +143,13 @@ export const RelatedAnime = ({anime, relation_type} : {anime: RelatedAnimeData[]
             <h4 className="text-center text-lg">{relation_type}</h4>
             <div className="flex flex-wrap">
                 {
-                    filteredData.map((item, index) => <RelatedC key={index} anime={item}/>)
+                    filteredData.map((item, index) => <Related key={index} anime={item}/>)
                 }
             </div>
         </>
     )
 }
-export const RelatedC = ({anime}:{anime: RelatedAnimeData}) => {
+export const Related = ({anime}:{anime: RelatedAnimeData}) => {
     // console.log(anime.node   );
     
     return(
