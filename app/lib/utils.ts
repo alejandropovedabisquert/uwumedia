@@ -1,4 +1,3 @@
-
 // Esta funcion corta el texto, debes pasrle como parametros el texto y el numero de caracteres que quieres que tenga
 export const truncateText = (text: string, maxLength: number) => {
     return text.length > maxLength ? text.substring(0, maxLength) + "..." : text;
@@ -16,7 +15,7 @@ export const secondsToMinutes = (seconds: number): string => {
     return `${minutes}`;
 };
 
-export function createSlug(text: string): string {
+export const createSlug = (text: string): string => {
     return text
       .toString() // Asegurarse de que el texto es una cadena
       .normalize('NFD') // Descomponer los caracteres acentuados en sus componentes
@@ -25,4 +24,9 @@ export function createSlug(text: string): string {
       .replace(/\s+/g, '_') // Reemplazar espacios con guiones
       .replace(/[^\w\-]+/g, '') // Eliminar todos los caracteres que no sean palabras o guiones
       .replace(/\-\-+/g, ''); // Reemplazar múltiples guiones con uno solo
-  }
+}
+
+  
+export const replaceLineBreak = (text: string): string =>{
+    return text.replace(/\n/g, '<br />');
+}

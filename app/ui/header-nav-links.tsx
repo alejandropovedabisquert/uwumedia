@@ -22,7 +22,7 @@ export default function HeaderNavLinks() {
                     href={link.href}
                     className={`${pathname == link.href ? 'bg-primary-color text-white': 'text-black'} transition-all p-3 text-lg font-bold hover:bg-primary-color hover:text-white md:p-4`}
                 >
-                    <p className="hidden md:block">{link.name}</p>
+                {link.name}
                 </Link>
                 );
             })}

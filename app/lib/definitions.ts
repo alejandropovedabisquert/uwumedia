@@ -24,9 +24,23 @@ export type AnimeNode = {
     mean: number;
     nsfw: string;
     rating: string;
+    background:string;
 };
 
 // Define el tipo para los datos de anime, que incluyen el nodo de anime
 export type AnimeData = {
     node: AnimeNode;
+};
+
+
+export type RelatedAnimeData = {
+    node: Related[];
+    relation_type_formatted: string;
+    relation_type: string;
+};
+
+export type Related = {
+    id: number;
+    title: string;
+    main_picture: AnimePicture;
 };

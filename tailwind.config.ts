@@ -10,7 +10,8 @@ export default {
     extend: {
       gridTemplateColumns: {
         'title': '1fr auto 1fr',
-        'about': '.1fr auto 1fr'
+        'left-side': '.1fr auto 1fr',
+        'right-side': '1fr auto .1fr'
       },
       gridTemplateRows: {
         'title': '16px 0'
