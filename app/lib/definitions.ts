@@ -34,7 +34,7 @@ export type AnimeData = {
 
 
 export type RelatedAnimeData = {
-    node: Related[];
+    node: Related;
     relation_type_formatted: string;
     relation_type: string;
 };

@@ -1,6 +1,6 @@
 import { fetchAnimeById } from "@/app/lib/data";
-import { RelatedAnimeData } from "@/app/lib/definitions";
 import { replaceLineBreak } from "@/app/lib/utils";
+import RelatedAnimeWrapper from "@/app/ui/anime/related-anime/RelatedAnimeWrapper";
 import { Titulo } from "@/app/ui/Titulo";
 import Image from "next/image";
 import { FaUserFriends } from "react-icons/fa";
@@ -116,45 +116,4 @@ export default async function AnimePage(props: { params: Promise<{ id: number }>
             <div>{anime.statistics.num_list_users}</div>
         </div>
     );
-}
-
-export const RelatedAnimeWrapper = ({data} : {data: RelatedAnimeData[]}) => {
-    console.log(data);
-
-    return(
-        <>
-            <RelatedAnime anime={data} relation_type="side_story"/>
-            <RelatedAnime anime={data} relation_type="summary"/>
-            <RelatedAnime anime={data} relation_type="alternative_version"/>
-            <RelatedAnime anime={data} relation_type="character"/>
-            <RelatedAnime anime={data} relation_type="other"/>
-        </>
-    )
-}
-
-export const RelatedAnime = ({anime, relation_type} : {anime: RelatedAnimeData[], relation_type:string}) => {
-    // console.log(anime.node);
-    const filteredData = anime.filter(list => list.relation_type === relation_type);
-    // console.log(filteredData);
-    
-    
-    return(
-        <>
-            <h4 className="text-center text-lg">{relation_type}</h4>
-            <div className="flex flex-wrap">
-                {
-                    filteredData.map((item, index) => <Related key={index} anime={item}/>)
-                }
-            </div>
-        </>
-    )
-}
-export const Related = ({anime}:{anime: RelatedAnimeData}) => {
-    // console.log(anime.node   );
-    
-    return(
-        <>
-            <Image src={anime.node.main_picture.medium} alt={anime.node.title} width={100} height={300}/>
-        </>
-    )
 }
