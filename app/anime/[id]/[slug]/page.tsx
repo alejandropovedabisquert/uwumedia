@@ -118,7 +118,7 @@ export default async function AnimePage(props: { params: Promise<{ id: number }>
     );
 }
 
-export function RelatedAnimeWrapper({data} : {data: RelatedAnimeData[]}) {
+export const RelatedAnimeWrapper = ({data} : {data: RelatedAnimeData[]}) => {
     console.log(data);
 
     return(
@@ -132,7 +132,7 @@ export function RelatedAnimeWrapper({data} : {data: RelatedAnimeData[]}) {
     )
 }
 
-export function RelatedAnime({anime, relation_type} : {anime: RelatedAnimeData[], relation_type:string}) {
+export const RelatedAnime = ({anime, relation_type} : {anime: RelatedAnimeData[], relation_type:string}) => {
     // console.log(anime.node);
     const filteredData = anime.filter(list => list.relation_type === relation_type);
     // console.log(filteredData);
@@ -143,13 +143,13 @@ export function RelatedAnime({anime, relation_type} : {anime: RelatedAnimeData[]
             <h4 className="text-center text-lg">{relation_type}</h4>
             <div className="flex flex-wrap">
                 {
-                    filteredData.map((item, index) => <Related key={index} anime={item}/>)
+                    filteredData.map((item, index) => <RelatedC key={index} anime={item}/>)
                 }
             </div>
         </>
     )
 }
-export function Related({anime}:{anime: RelatedAnimeData}) {
+export const RelatedC = ({anime}:{anime: RelatedAnimeData}) => {
     // console.log(anime.node   );
     
     return(
