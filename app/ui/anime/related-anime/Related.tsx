@@ -6,7 +6,7 @@ export default function Related({anime}:{anime: RelatedAnimeData}) {
     
     return(
         <>
-            <Image src={anime.node.main_picture.medium} alt={anime.node.title} width={100} height={300}/>
+            <Image src={anime.node.main_picture.large} alt={anime.node.title} className="w-full h-auto" width={300} height={0}/>
         </>
     )
 }

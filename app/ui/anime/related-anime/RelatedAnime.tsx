@@ -5,12 +5,10 @@ export default function RelatedAnime({anime, relation_type} : {anime: RelatedAni
     // console.log(anime.node);
     const filteredData = anime.filter(list => list.relation_type === relation_type);
     // console.log(filteredData);
-    
-    
     return(
         <>
             <h4 className="text-center text-lg">{relation_type}</h4>
-            <div className="flex flex-wrap">
+            <div className="grid grid-cols-2 md:grid-cols-8 gap-4">
                 {
                     filteredData.map((item, index) => <Related key={index} anime={item}/>)
                 }
