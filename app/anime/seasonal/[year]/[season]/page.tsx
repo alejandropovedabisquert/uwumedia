@@ -3,7 +3,11 @@ import { CardsWrapper } from "@/app/ui/anime/seasonal/CardsWrapper";
 import { SeasonSelector } from "@/app/ui/anime/seasonal/SeasonSelector";
 import { redirect } from "next/navigation";
 
-export default async function Page({ params }: { params: { year: number; season: string } }) {
+type PageProps = {
+    params: { year: number; season: string };
+};
+
+export default async function Page({ params }: PageProps ) {
     const { year, season } = params;
         let seasonalList = [];
 
