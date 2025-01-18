@@ -4,7 +4,7 @@ import { SeasonSelector } from "@/app/ui/anime/seasonal/SeasonSelector";
 import { redirect } from "next/navigation";
 
 export default async function Page({ params }: { params: { year: number; season: string } }) {
-    const { year, season } = await params;
+    const { year, season } = params;
         let seasonalList = [];
 
     try {
@@ -16,6 +16,7 @@ export default async function Page({ params }: { params: { year: number; season:
 
     if (seasonalList.error == "not_found") {
         redirect(`/anime/seasonal/`);
+        return null
     }
     
     return (
