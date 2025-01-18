@@ -14,6 +14,18 @@ const Tooltip: React.FC<TooltipProps> = ({ children, content }) => {
   const [position, setPosition] = useState<'top' | 'bottom' | 'left' | 'right'>('right'); // Cambiar aquí la posición inicial
   const tooltipRef = useRef<HTMLDivElement | null>(null);
   const containerRef = useRef<HTMLDivElement | null>(null);
+  const {
+    main_picture,
+    synopsis,
+    media_type,
+    start_date,
+    num_episodes,
+    title,
+    genres,
+    mean,
+    } = content;
+    // const image_large = main_picture?.large || '/logos/logo-primary.svg';
+    const image_medium = main_picture?.medium || '/logos/logo-primary.svg';
 
   useEffect(() => {
     if (!visible || !tooltipRef.current || !containerRef.current) return;
@@ -48,58 +60,65 @@ const Tooltip: React.FC<TooltipProps> = ({ children, content }) => {
       onMouseLeave={() => setVisible(false)}
     >
       {children}
-      {visible &&
-        <div
-          ref={tooltipRef}
-          className={`absolute z-50 p-2 text-sm bg-white rounded-2xl shadow-md border-primary-color border-2 w-[650px] ${position === 'top'
-            ? 'bottom-full left-1/2 transform -translate-x-1/2'
-            : position === 'bottom'
-              ? 'top-full left-1/2 transform -translate-x-1/2'
-              : position === 'left'
-                ? 'right-[105%] top-1/2 transform -translate-y-1/2'
-                : 'left-[105%] top-1/2 transform -translate-y-1/2'
-            }`}
-        >
-          <h4 className='text-xl font-bold'>{content.title}</h4>
-          <div className="z-10 w-fit overflow-hidden text-sm leading-6 flex items-center mt-2 mb-4">
-            <span className='uppercase flex items-center mr-2'>
-              <FaTv className='mr-1' /> {content.media_type} 
-              ({content.num_episodes == 0 ? "N/A" : content.num_episodes} <span className='ml-1 lowercase'>episodes</span>)
-            </span>  |
-            <span className='mx-2'>{content.start_date}</span>|
-            <span className='uppercase flex items-center ml-2'>
-              <FaStar className="mr-1" />
-              {content.mean == null ? "N/A" : content.mean}
-            </span>
-          </div>
-          <div className='flex'>
-            <Image src={content.main_picture.medium} alt={content.title} className="h-fit mr-4 rounded-2xl" height={300} width={200}/>
-            <div>
-              {
-                content.synopsis ? <p className='text-sm whitespace-normal relative' dangerouslySetInnerHTML={{ __html: replaceLineBreak(content.synopsis) }} /> : ''
-              }
-              <span className='flex flex-wrap font-bold items-center mt-2'>
-                <span className='mr-2'>
-                  Genres:
-                </span>
-                <Genres genres={content.genres}/> 
+      <div className={`absolute z-50 duration-500 opacity-0 ${visible ? 'opacity-100' : null}
+        ${position === 'top'
+          ? 'bottom-full left-1/2 transform -translate-x-1/2'
+          : position === 'bottom'
+            ? 'top-full left-1/2 transform -translate-x-1/2'
+            : position === 'left'
+              ? 'right-[105%] top-1/2 transform -translate-y-1/2'
+              : 'left-[105%] top-1/2 transform -translate-y-1/2'
+        }`}>
+        {visible &&
+          <div
+            ref={tooltipRef}
+            onMouseEnter={() => setVisible(false)}
+            className={`p-2 text-sm bg-white rounded-2xl shadow-md border-primary-color border-2 w-[650px]`}>
+            <h4 className='text-xl font-bold'>{title}</h4>
+            <div className="z-10 w-fit overflow-hidden text-sm leading-6 flex items-center mt-2 mb-4">
+              <span className='uppercase flex items-center mr-2'>
+                <FaTv className='mr-1' /> {media_type}
+                ({num_episodes == 0 ? "N/A" : num_episodes} <span className='ml-1 lowercase'>episodes</span>)
+              </span>  |
+              <span className='mx-2'>{start_date}</span>|
+              <span className='uppercase flex items-center ml-2'>
+                <FaStar className="mr-1" />
+                {mean == null ? "N/A" : mean}
               </span>
             </div>
+            <div className='flex'>
+              <Image src={image_medium} alt={title} className="h-fit mr-4 rounded-2xl" height={300} width={200} />
+              <div>
+                {
+                  synopsis ? <p className='text-sm whitespace-normal relative' dangerouslySetInnerHTML={{ __html: replaceLineBreak(synopsis) }} /> : ''
+                }
+                {
+                  genres ?
+                    <span className='flex flex-wrap font-bold items-center mt-2'>
+                      <span className='mr-2'>
+                        Genres:
+                      </span>
+                      <Genres genres={genres} />
+                    </span>
+                    : null
+                }
+              </div>
+            </div>
           </div>
-        </div>
-      }
+        }
+      </div>
     </div>
   );
 };
 
-export function Genres({genres} : {genres: AnimeGenre[]} ){    
-    return(
-        <>
-        {genres.map((genre) =>(
-            <span key={genre.id} className="z-10 w-fit gap-y-1 font-normal pr-2 overflow-hidden text-sm leading-6">{genre.name}</span>
-        ))}
-        </>
-    )
+export function Genres({ genres }: { genres: AnimeGenre[] }) {
+  return (
+    <>
+      {genres.map((genre) => (
+        <span key={genre.id} className="z-10 w-fit gap-y-1 font-normal pr-2 overflow-hidden text-sm leading-6">{genre.name}</span>
+      ))}
+    </>
+  )
 }
 
 export default Tooltip;

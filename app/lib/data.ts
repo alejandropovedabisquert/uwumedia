@@ -1,7 +1,7 @@
-export async function fetchSeasonalAnime() {
-    
+export async function fetchSeasonalAnime(year: number, season: string) {
+    // const { year, season } = getCurrentSeason();
     try {
-        const response = await fetch("https://api.myanimelist.net/v2/anime/season/2025/winter?limit=500&nsfw=true&fields=id,title,main_picture,start_date,mean,nsfw,media_type,genres,num_episodes,average_episode_duration,rating,synopsis,media_type,start_date", {
+        const response = await fetch(`https://api.myanimelist.net/v2/anime/season/${year}/${season}?limit=500&nsfw=true&fields=id,title,main_picture,start_date,mean,nsfw,media_type,genres,num_episodes,average_episode_duration,rating,synopsis,media_type,start_date`, {
             method: 'GET', // Method is optional because GET is the default
             headers: {
                 'X-MAL-CLIENT-ID': process.env.X_MAL_CLIENT_ID!,

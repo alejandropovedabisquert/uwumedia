@@ -9,10 +9,7 @@ import Tooltip from "./Tooltip";
 export function Card({data}:{data: AnimeData }) {
     const {
         id,
-        main_picture: { 
-            large: image_large, 
-            // medium: image_medium 
-        },
+        main_picture,
         start_date,
         num_episodes,
         average_episode_duration,
@@ -22,6 +19,8 @@ export function Card({data}:{data: AnimeData }) {
         nsfw,
         rating,
     } = data.node;
+    const image_large = main_picture?.large || '/logos/logo-primary.svg';
+    // const image_medium = main_picture?.medium || '/logos/logo-primary.svg';
     // console.log(data.node);
     return(
         <article className="w-full max-w-[45%] md:max-w-xs mb-4 md:mb-12 mx-0">
@@ -45,7 +44,9 @@ export function Card({data}:{data: AnimeData }) {
                             </div>
                             <h3 className="z-10 mt-3 text-sm md:text-lg font-bold text-white">{title}</h3>
                             <div className="flex flex-wrap">
-                                <Genres genres={genres}/> 
+                                {
+                                    genres ? <Genres genres={genres}/> : null
+                                }
                                 <div className="z-10 w-fit overflow-hidden text-sm leading-6 text-gray-300 ml-2 flex items-center">
                                     <FaStar className="mr-1" />
                                     {mean == null ? "N/A" : mean}

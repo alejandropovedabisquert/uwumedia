@@ -1,18 +1,18 @@
+import { AnimeData } from "@/app/lib/definitions";
 import CardList from "./CardList";
-import { fetchSeasonalAnime } from "@/app/lib/data";
 
-export async function CardsWrapper() {
-    const seasonalList = await fetchSeasonalAnime();
+export function CardsWrapper({seasonalList} : {seasonalList: AnimeData[]}) {
+    
     
     return (
         <>
-            <CardList media_type="tv" data={seasonalList.data} />
-            <CardList media_type="ona" data={seasonalList.data} />
-            <CardList media_type="ova" data={seasonalList.data} />
-            <CardList media_type="movie" data={seasonalList.data} />
-            <CardList media_type="special" data={seasonalList.data} />
-            <CardList media_type="tv_special" data={seasonalList.data} />
-            <CardList media_type="music" data={seasonalList.data} />
+            <CardList media_type="tv" data={seasonalList} />
+            <CardList media_type="ona" data={seasonalList} />
+            <CardList media_type="ova" data={seasonalList} />
+            <CardList media_type="movie" data={seasonalList} />
+            <CardList media_type="special" data={seasonalList} />
+            <CardList media_type="tv_special" data={seasonalList} />
+            <CardList media_type="music" data={seasonalList} />
         </>
     );
 }
