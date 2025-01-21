@@ -74,8 +74,8 @@ const Tooltip: React.FC<TooltipProps> = ({ children, content }) => {
             ref={tooltipRef}
             onMouseEnter={() => setVisible(false)}
             className={`p-2 text-sm bg-white rounded-2xl shadow-md border-primary-color border-2 w-[450px] lg:w-[650px]`}>
-            <h4 className='text-xl font-bold text-black'>{title}</h4>
-            <div className="z-10 w-fit overflow-hidden text-sm leading-6 flex items-center mt-2 mb-4 text-black">
+            <h4 className='text-xl font-bold'>{title}</h4>
+            <div className="z-10 w-fit overflow-hidden text-sm leading-6 flex items-center mt-2 mb-4">
               <span className='uppercase flex items-center mr-2'>
                 <FaTv className='mr-1' /> {media_type}
                 ({num_episodes == 0 ? "N/A" : num_episodes} <span className='ml-1 lowercase'>episodes</span>)
@@ -90,11 +90,11 @@ const Tooltip: React.FC<TooltipProps> = ({ children, content }) => {
               <Image unoptimized={true} src={image_medium} alt={title} className="h-fit mr-4 rounded-2xl" height={300} width={200} />
               <div>
                 {
-                  synopsis ? <p className='text-sm whitespace-normal relative text-black' dangerouslySetInnerHTML={{ __html: replaceLineBreak(synopsis) }} /> : ''
+                  synopsis ? <p className='text-sm whitespace-normal relative' dangerouslySetInnerHTML={{ __html: replaceLineBreak(synopsis) }} /> : ''
                 }
                 {
                   genres ?
-                    <span className='flex flex-wrap font-bold items-center mt-2 text-black'>
+                    <span className='flex flex-wrap font-bold items-center mt-2'>
                       <span className='mr-2'>
                         Genres:
                       </span>
@@ -115,7 +115,7 @@ export function Genres({ genres }: { genres: AnimeGenre[] }) {
   return (
     <>
       {genres.map((genre) => (
-        <span key={genre.id} className="z-10 w-fit gap-y-1 font-normal pr-2 overflow-hidden text-sm leading-6 text-black">{genre.name}</span>
+        <span key={genre.id} className="z-10 w-fit gap-y-1 font-normal pr-2 overflow-hidden text-sm leading-6">{genre.name}</span>
       ))}
     </>
   )
