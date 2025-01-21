@@ -2,7 +2,7 @@
 import { getCurrentSeason } from "@/app/lib/utils";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 interface Errors {
     year?: string;
