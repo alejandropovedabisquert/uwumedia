@@ -1,8 +1,12 @@
 import { fetchAnimeById } from "@/app/lib/data";
 import { replaceLineBreak } from "@/app/lib/utils";
-import RelatedAnimeWrapper from "@/app/ui/anime/related-anime/RelatedAnimeWrapper";
-import { Titulo } from "@/app/ui/Titulo";
+import AlternativeTitles from "@/app/ui/anime/id/AlternativeTitles/AlternativeTitles";
+import Information from "@/app/ui/anime/id/Information/Information";
+import RelatedAnimeWrapper from "@/app/ui/anime/id/RelatedAnime/RelatedAnimeWrapper";
+import Statistics from "@/app/ui/anime/id/Statistics/Statistics";
+import { Titulo } from "@/app/ui/common/Titulo";
 import Image from "next/image";
+import { notFound } from "next/navigation";
 import { FaUserFriends } from "react-icons/fa";
 import { FaCertificate, FaRankingStar, FaStar } from "react-icons/fa6";
 
@@ -10,8 +14,10 @@ export default async function AnimePage(props: { params: Promise<{ id: number }>
     const params = await props.params;
     const id = params.id;
     const anime = await fetchAnimeById(id);
-    console.log(anime);
-
+    if (anime.error == "not_found") {
+        notFound();
+        return null
+    }
     return (
         <div>
             {/* TOP BAR */}
@@ -21,22 +27,12 @@ export default async function AnimePage(props: { params: Promise<{ id: number }>
             <div className="flex flex-wrap md:flex-nowrap justify-start">
                 {/* LEFT BAR */}
                 <div className="w-full max-w-md md:pr-10">
-                    <Image src={anime.main_picture.large} alt={anime.title} className="rounded-2xl" width={400} height={400}/>
+                    <Image src={anime.main_picture?.large} alt={anime.title} className="rounded-2xl" width={400} height={400}/>
 
                     {/* ALTERNATIVE NAMES */}
-                    <div>{anime.alternative_titles.en}</div>
-                    <div>{anime.alternative_titles.ja}</div>
-                    {/* <div>{anime.alternative_titles.synonyms}</div> Esto hay que hacerle un bucle */}
-
-                    {/* FECHA DE SALLIDA */}
-                    <div>{anime.start_date}</div>
-
-                    {/* DONDE HA SALIDO */}
-                    <div>{anime.media_type}</div>
-
-                    {/* EN QUE ESTADO ESTA EL ANIME */}
-                    <div>{anime.status}</div>
-
+                    <AlternativeTitles anime={anime}/>
+                    <Information anime={anime}/>
+                    <Statistics anime={anime}/>
                 </div>
                 {/* RIGHT BAR */}
                 <div className="w-full max-w-5xl">
@@ -48,24 +44,24 @@ export default async function AnimePage(props: { params: Promise<{ id: number }>
                                 </div>
                                 Score
                                 <div className="text-sm mt-2">
-                                    {anime.num_scoring_users.toLocaleString()} users
+                                    {anime.num_scoring_users?.toLocaleString()} users
                                 </div>
                         </div>
                         <div className="max-w-40 w-full text-center flex justify-start items-center flex-col">
                             <div className="text-xl font-bold flex justify-center items-center">
-                                {anime.rank.toLocaleString()} <FaRankingStar className="ml-2"/>
+                                {anime.rank?.toLocaleString()} <FaRankingStar className="ml-2"/>
                             </div>
                             Ranked
                         </div>
                         <div className="max-w-40 w-full text-center flex justify-start items-center flex-col">
                             <div className="text-xl font-bold flex justify-center items-center">
-                                {anime.popularity.toLocaleString()} <FaCertificate className="ml-2"/>
+                                {anime.popularity?.toLocaleString()} <FaCertificate className="ml-2"/>
                             </div>
                             Popularity
                         </div>
                         <div className="max-w-40 w-full text-center flex justify-start items-center flex-col">
                             <div className="text-xl font-bold flex justify-center items-center">
-                                {anime.num_list_users.toLocaleString()} <FaUserFriends className="ml-2"/>
+                                {anime.num_list_users?.toLocaleString()} <FaUserFriends className="ml-2"/>
                             </div>
                             Members
                         </div>
@@ -88,26 +84,15 @@ export default async function AnimePage(props: { params: Promise<{ id: number }>
                         <RelatedAnimeWrapper data={anime.related_anime} />
                     </div>
                     {/* <div>{anime.related_anime}</div> ESTO HAY QUE HACERLE UN BUCLE */}
-                    {/* <div>{anime.related_manga}</div>  CREO QUE CON ESTO NECESITO EL AUTH*/}
+                    {/* <div>{anime.related_manga}</div>  LA API TIENE UN BUG QUE HACE QUE NO APAREZCAN*/}
                 </div>
 
             </div>
 
 
-
-            {/* <div>{anime.genres}</div> ESTO HAY QUE HACERLE UN BUCLE */}
-            <div>{anime.num_episodes}</div>
-            <div>{anime.start_season.year}</div>
-            <div>{anime.start_season.season}</div>
-            <div>{anime.broadcast.day_of_the_week}</div>
-            <div>{anime.broadcast.start_time}</div>
-            <div>{anime.source}</div>
-            <div>{anime.average_episode_duration}</div>
-            <div>{anime.rating}</div>
             {/* <div>{anime.pictures}</div> ESTO HAY QUE HACERLE UN BUCLE */}
-            <div>{anime.background}</div>
             {/* <div>{anime.recommendations}</div> CREO QUE CON ESTO NECESITO EL AUTH */}
-            {/* <div>{anime.studios}</div> NECESITA UN BUCLE*/}
+            
             <div>{anime.statistics.status.watching}</div>
             <div>{anime.statistics.status.completed}</div>
             <div>{anime.statistics.status.on_hold}</div>

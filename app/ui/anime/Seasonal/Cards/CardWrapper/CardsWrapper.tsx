@@ -1,5 +1,5 @@
 import { AnimeData } from "@/app/lib/definitions";
-import CardList from "./CardList";
+import CardList from "@/app/ui/anime/Seasonal/Cards/CardList/CardList";
 
 export function CardsWrapper({seasonalList} : {seasonalList: AnimeData[]}) {
     

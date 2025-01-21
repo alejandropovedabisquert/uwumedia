@@ -1,6 +1,6 @@
 import { fetchSeasonalAnime } from "@/app/lib/data";
-import { CardsWrapper } from "@/app/ui/anime/seasonal/CardsWrapper";
-import { SeasonSelector } from "@/app/ui/anime/seasonal/SeasonSelector";
+import { CardsWrapper } from "@/app/ui/anime/Seasonal/Cards/CardWrapper/CardsWrapper";
+import { SeasonSelector } from "@/app/ui/anime/Seasonal/SeasonSelector/SeasonSelector";
 import { redirect } from "next/navigation";
 
 type Params =Promise<{ 

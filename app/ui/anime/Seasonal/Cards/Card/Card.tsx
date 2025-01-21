@@ -4,7 +4,7 @@ import { createSlug, formatDate, secondsToMinutes } from "@/app/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
 import { FaStar } from "react-icons/fa6";
-import Tooltip from "./Tooltip";
+import Tooltip from "@/app/ui/anime/Seasonal/Tooltip/Tooltip";
 
 export function Card({data}:{data: AnimeData }) {
     const {
@@ -32,7 +32,7 @@ export function Card({data}:{data: AnimeData }) {
                 }  
                 <Link href={`/anime/${id}/${createSlug(title)}`}>
                         <div className="group relative isolate flex flex-col justify-end overflow-hidden rounded-2xl h-60 md:h-96 px-4 md:px-8 pb-4 md:pb-8 pt-40">
-                            <Image src={image_large} alt={title} className="absolute inset-0 h-full w-full object-cover object-top transition-all duration-500 group-hover:scale-125" fill/>
+                            <Image unoptimized={true} src={image_large} alt={title} className="absolute inset-0 h-full w-full object-cover object-top transition-all duration-500 group-hover:scale-125" fill/>
                             <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/40"></div>
                             <div className="z-10 top-0 right-0 absolute bg-primary-color flex flex-wrap py-2 px-4 rounded-bl-2xl">
                                 <div className="text-sm text-white flex">

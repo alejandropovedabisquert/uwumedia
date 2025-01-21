@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { GeistSans } from "geist/font/sans";
 import "./globals.css";
 import Image from "next/image";
-import HeaderNavLinks from "./ui/header-nav-links";
+import HeaderNavLinks from "./ui/common/header-nav-links";
 
 
 export const metadata: Metadata = {
@@ -32,7 +32,7 @@ export default function RootLayout({
             </div>
           </div>
         </header>
-        <main className="max-w-screen-2xl m-auto">
+        <main className="max-w-screen-2xl m-auto bg-white">
           {children}
         </main>
       </body>

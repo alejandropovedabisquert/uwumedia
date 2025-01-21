@@ -1,8 +1,8 @@
 "use client";
 import { getCurrentSeason } from "@/app/lib/utils";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { usePathname, useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 interface Errors {
     year?: string;
@@ -13,7 +13,8 @@ export function SeasonSelector() {
     const seasons = ["winter", "spring", "summer", "fall"];
     const router = useRouter();
     const [errors, setErrors] = useState<Errors>({});
-
+    const pathname = usePathname();
+    
     const submit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         const formData = new FormData(event.target as HTMLFormElement);
@@ -72,11 +73,19 @@ export function SeasonSelector() {
                     Jump to
                 </span>
                 <form onSubmit={submit}>
-                    <input className="bg-gray-200 rounded-lg p-2" id="year" name="year" type="text" placeholder="Year" />
-                    <select className="bg-gray-200 rounded-lg py-2 px-4" id="season" name="season">
-                        <option value="">Select a season</option>
+                    <input className="bg-gray-200 rounded-lg p-2" id="year" name="year" type="text" defaultValue={pathname.split("/")[3]} placeholder="Year" />
+                    <select className="bg-gray-200 rounded-lg py-2 px-4" id="season" name="season" defaultValue={pathname.split("/")[4]}>
                         {seasons.map((season) => (
-                            <option key={season} value={season}>
+                            // pathname.split("/")[4] === season ? (
+                            //     <option key={season} value={season} defaultValue={season} selected>
+                            //         {season.charAt(0).toUpperCase() + season.slice(1)}
+                            //     </option>
+                            // ) : (
+                            //     <option key={season} value={season} defaultValue={season}>
+                            //         {season.charAt(0).toUpperCase() + season.slice(1)}
+                            //     </option>
+                            // )
+                            <option key={season} value={season} defaultValue={season}>
                                 {season.charAt(0).toUpperCase() + season.slice(1)}
                             </option>
                         ))}
