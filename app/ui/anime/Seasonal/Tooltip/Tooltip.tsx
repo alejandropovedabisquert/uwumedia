@@ -90,7 +90,7 @@ const Tooltip: React.FC<TooltipProps> = ({ children, content }) => {
               <Image unoptimized={true} src={image_medium} alt={title} className="h-fit mr-4 rounded-2xl" height={300} width={200} />
               <div>
                 {
-                  synopsis ? <p className='text-sm whitespace-normal relative' dangerouslySetInnerHTML={{ __html: replaceLineBreak(synopsis) }} /> : ''
+                  synopsis ? <p className='text-sm whitespace-normal relative' dangerouslySetInnerHTML={{ __html: replaceLineBreak(synopsis) }} /> : '(No synopsis information has been added to this title.)'
                 }
                 {
                   genres ?

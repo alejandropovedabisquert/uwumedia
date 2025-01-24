@@ -10,7 +10,7 @@ type Params =Promise<{
 
 export default async function Page({ params }: { params: Params } ) {
     const { year, season } = await params;
-        let seasonalList = [];
+    let seasonalList = [];
 
     try {
         seasonalList = await fetchSeasonalAnime(year, season);

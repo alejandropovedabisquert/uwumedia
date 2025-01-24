@@ -76,15 +76,6 @@ export function SeasonSelector() {
                     <input className="bg-gray-200 rounded-lg p-2" id="year" name="year" type="text" defaultValue={pathname.split("/")[3]} placeholder="Year" />
                     <select className="bg-gray-200 rounded-lg py-2 px-4" id="season" name="season" defaultValue={pathname.split("/")[4]}>
                         {seasons.map((season) => (
-                            // pathname.split("/")[4] === season ? (
-                            //     <option key={season} value={season} defaultValue={season} selected>
-                            //         {season.charAt(0).toUpperCase() + season.slice(1)}
-                            //     </option>
-                            // ) : (
-                            //     <option key={season} value={season} defaultValue={season}>
-                            //         {season.charAt(0).toUpperCase() + season.slice(1)}
-                            //     </option>
-                            // )
                             <option key={season} value={season} defaultValue={season}>
                                 {season.charAt(0).toUpperCase() + season.slice(1)}
                             </option>

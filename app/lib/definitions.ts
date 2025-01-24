@@ -10,6 +10,11 @@ export type AnimeGenre = {
     name: string;
 }
 
+export type AnimeStudios = {
+    id: number;
+    name: string;
+}
+
 export type AnimeStartSeason = {
     year: number;
     season: string;
@@ -63,6 +68,8 @@ export type AnimeNode = {
     rank: number;
     popularity: number;
     num_list_users: number;
+    num_scoring_users: number;
+    studios: AnimeStudios[];
 };
 
 // Define el tipo para los datos de anime, que incluyen el nodo de anime
@@ -81,4 +88,18 @@ export type Related = {
     id: number;
     title: string;
     main_picture: AnimePicture;
+};
+
+export type CharacterNode = {
+    id: number;
+    first_name: string;
+    last_name: string;
+    alternative_name: string;
+    main_picture: AnimePicture;
+    biography: string;
+    num_favorites: number;
+};
+
+export type CharactersData = {
+    node: CharacterNode;
 };
