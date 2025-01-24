@@ -11,7 +11,8 @@ import { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 
-export async function generateMetadata({ params }: { params: Promise<{ id: number }> }) {
+export async function generateMetadata( props : { params: Promise<{ id: number }> }) {
+    const params = await props.params;
     const id = params.id;
     let anime = [];
 
