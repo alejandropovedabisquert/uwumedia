@@ -7,7 +7,6 @@ import Information from "@/app/ui/anime/id/Information/Information";
 import RelatedAnimeWrapper from "@/app/ui/anime/id/RelatedAnime/RelatedAnimeWrapper";
 import Statistics from "@/app/ui/anime/id/Statistics/Statistics";
 import { Titulo } from "@/app/ui/common/Titulo";
-import { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 
