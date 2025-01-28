@@ -7,10 +7,10 @@ export function middleware(request: Request) {
 
   // Revisa si estamos en la ruta /anime/seasonal
   if (url.pathname === '/anime/seasonal') {
-     const { year, season } = getCurrentSeason();
+     const { actualYear, actualSeason } = getCurrentSeason();
 
     // Construye la nueva URL
-    const newUrl = `${url.origin}/anime/seasonal/${year}/${season}`;
+    const newUrl = `${url.origin}/anime/seasonal/${actualYear}/${actualSeason}`;
 
     // Redirige a la nueva URL
     return NextResponse.redirect(newUrl);

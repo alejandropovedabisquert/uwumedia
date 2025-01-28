@@ -14,7 +14,6 @@ export function SeasonSelector() {
     const router = useRouter();
     const [errors, setErrors] = useState<Errors>({});
     const pathname = usePathname();
-    
     const submit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         const formData = new FormData(event.target as HTMLFormElement);
@@ -44,20 +43,42 @@ export function SeasonSelector() {
         router.push(`/anime/seasonal/${year}/${season}`);
     };
 
-    const { season, year } = getCurrentSeason();
+    const { actualSeason, actualYear } = getCurrentSeason();
+    const season = pathname.split("/")[4];
+    const year = Number(pathname.split("/")[3]);
     const currentSeasonIndex = seasons.indexOf(season);
-
+    
     const buttonsData = [
         { season: seasons[(currentSeasonIndex - 1 + 4) % 4], year: currentSeasonIndex === 0 ? year - 1 : year },
         { season: season, year: year },
         { season: seasons[(currentSeasonIndex + 1) % 4], year: currentSeasonIndex === 3 ? year + 1 : year },
         { season: seasons[(currentSeasonIndex + 2) % 4], year: currentSeasonIndex >= 2 ? year + 1 : year }
     ];
+    
+    // Función para calcular la diferencia en temporadas
+    const getSeasonDifference = (targetSeason: string, targetYear: number, currentSeason: string, currentYear: number): number => {
+        const targetIndex = seasons.indexOf(targetSeason);
+        const currentIndex = seasons.indexOf(currentSeason);
+    
+        // Calculamos la diferencia total en temporadas
+        const totalDifference = (targetYear - currentYear) * 4 + (targetIndex - currentIndex);
+        
+        return totalDifference;
+    };
+    
+    // Filtrar los botones para que no excedan 2 temporadas de diferencia
+    const filteredButtonsData = buttonsData.filter(button => {
+        // console.log(button.season, button.year, actualSeason, actualYear);
+        
+        const difference = getSeasonDifference(button.season, button.year, actualSeason, actualYear);
+        
+        return difference <= 2;
+    });
 
     return (
         <div className="flex justify-between items-center">
-            <div className="flex flex-wrap">
-                {buttonsData.map((data) => (
+            <div className="flex flex-wrap items-center">
+                {filteredButtonsData.map((data) => (
                     <Link
                         key={`${data.season}-${data.year}`}
                         href={`../${data.year}/${data.season}`}
@@ -67,6 +88,7 @@ export function SeasonSelector() {
                     </Link>
 
                 ))}
+                 {filteredButtonsData.length < 4 ? "No more seasons": null}
             </div>
             <div className="flex flex-wrap items-center">
                 <span className="mr-2">

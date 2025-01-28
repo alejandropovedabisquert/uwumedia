@@ -34,19 +34,19 @@ export const replaceLineBreak = (text: string): string =>{
 
 export const getCurrentSeason = () =>{
     const now = new Date();
-    const year = now.getFullYear();
+    const actualYear = now.getFullYear();
     const month = now.getMonth(); // Los meses van de 0 a 11
 
-    let season;
+    let actualSeason;
     if (month >= 0 && month <= 2) {
-        season = 'winter'; // Enero, Febrero, Marzo
+        actualSeason = 'winter'; // Enero, Febrero, Marzo
     } else if (month >= 3 && month <= 5) {
-        season = 'spring'; // Abril, Mayo, Junio
+        actualSeason = 'spring'; // Abril, Mayo, Junio
     } else if (month >= 6 && month <= 8) {
-        season = 'summer'; // Julio, Agosto, Septiembre
+        actualSeason = 'summer'; // Julio, Agosto, Septiembre
     } else {
-        season = 'fall'; // Octubre, Noviembre, Diciembre
+        actualSeason = 'fall'; // Octubre, Noviembre, Diciembre
     }
 
-    return { year, season };
+    return { actualYear, actualSeason };
 }
