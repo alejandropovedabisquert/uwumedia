@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { GeistSans } from "geist/font/sans";
 import "./globals.css";
 import Image from "next/image";
-import Navbar from "./common/Navbar";
+import Navbar from "@/components/common/Navbar";
 
 export const metadata: Metadata = {
   title: "UwUmedia",
@@ -24,7 +24,7 @@ export default function RootLayout({
         <header>
           <div className="max-w-screen-2xl m-auto flex flex-wrap justify-between">
             <Link href="/">
-              <Image src='/logos/logo-primary.svg' alt="Logo UwUmedia" width={250} height={300} priority />
+              <Image src='/logos/logo-primary.svg' alt="Logo UwUmedia" width={250} height={300} priority unoptimized={true}/>
             </Link>
             <Navbar />
           </div>

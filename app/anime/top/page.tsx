@@ -1,36 +1,30 @@
 "use client";
 import { useEffect, useState } from "react";
 import Loading from "./loading";
-import { useSearchParams, useRouter } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import TopAnimeApiResponse from "@/interfaces/top/interfacesTopAnime";
 import { getTopAnime } from "@/lib/top/getTopAnime";
 import Image from "next/image";
+import CategoryNavigation from "@/components/topAnime/categoryNavigation";
+import TopAnimePagination from "@/components/topAnime/topAnimePagination";
+import {
+    Table,
+    TableBody,
+    TableCell,
+    TableHead,
+    TableHeader,
+    TableRow,
+} from "@/components/ui/table"
+import { StarIcon } from "lucide-react";
 
-
-const categories = [
-    { name: "", label: "All Anime" },
-    { name: "?filter=airing", label: "Top Airing" },
-    { name: "?filter=upcoming", label: "Top Upcoming" },
-    { name: "?type=tv", label: "Top TV Series" },
-    { name: "?type=movie", label: "Top Movies" },
-    { name: "?type=ova", label: "Top OVAs" },
-    { name: "?type=ona", label: "Top ONAs" },
-    { name: "?type=special", label: "Top Specials" },
-    { name: "?type=music", label: "Top Music" },
-    { name: "?type=cm", label: "Top CM" },
-    { name: "?type=pv", label: "Top PV" },
-    { name: "?type=tv_special", label: "Top TV Special" },
-    { name: "?filter=bypopularity", label: "Most Popular" },
-    { name: "?filter=favorite", label: "Most Favorted" },
-];
 
 export default function Page() {
     const [topAnimes, setTopAnimes] = useState<TopAnimeApiResponse | null>(null);
     const [error, setError] = useState<string | null>(null);
-    const [currentPage, setCurrentPage] = useState(1);
+    //No esta usando currentPage solo se usa setCurrentPage
+    const [, setCurrentPage] = useState(1);
     const [isLoading, setIsLoading] = useState(false);
     const searchParams = useSearchParams();
-    const router = useRouter();
 
     // Obtener los parámetros de la URL
     const page = searchParams.get("page") || "1";
@@ -58,24 +52,6 @@ export default function Page() {
         fetchPosts();
     }, [page, type, filter, rating, sfw]);
 
-    // Función para cargar la siguiente página
-    const loadNextPage = (page: number) => {
-        setCurrentPage(page);
-        let url = `/anime/top?page=${page}`;
-
-        if (type) {
-            url += `&type=${type}`;
-        }
-
-        // router.push(`/anime/top?page=${nextPage}&type=${type}&filter=${filter}&rating=${rating}&sfw=${sfw}`);
-        router.push(url);
-    };
-
-    const loadTypeFilter = (type: string) => {
-        const url = `/anime/top${type}`;
-        setCurrentPage(1);
-        router.push(url);
-    }
 
     if (error) {
         return <div>Error: {error}</div>;
@@ -91,46 +67,53 @@ export default function Page() {
 
             {/* Botones para filtrar por categoría */}
             <div>
-                {categories.map((category, index) => (
-                    <button key={index} className="mr-4 bg-slate-100" onClick={() => loadTypeFilter(category.name)}>
-                        {category.label}
-                    </button>
-                ))}
+                <CategoryNavigation setCurrentPage={setCurrentPage} />
             </div>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Rank</th>
-                        <th>Title</th>
-                        <th>Score</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {topAnimes.data.map((anime, index) => (
-                        <tr key={index}>
-                            <td>{anime.rank}</td>
-                            <td>
-                                {anime.title}
-                                <Image className="max-w-32" src={anime.images.jpg.image_url} alt={anime.title} width={300} height={300} unoptimized={false}/>
-                                {anime.type} {anime.episodes ?? 0} episodes
-                            </td>
-                            <td>{anime.score ?? "N/A"}</td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
-
+            <div>
+                <Table>
+                    {/* <TableCaption>A list of your recent invoices.</TableCaption> */}
+                    <TableHeader>
+                        <TableRow>
+                            <TableHead className="w-[100px]">Rank</TableHead>
+                            <TableHead>Title</TableHead>
+                            <TableHead className="text-right">Score</TableHead>
+                        </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                        {topAnimes.data.map((anime, index) => (
+                            <TableRow key={index}>
+                                <TableCell className="font-bold text-3xl">{anime.rank}</TableCell>
+                                <TableCell className="flex flex-wrap gap-6">
+                                    <div>
+                                        <Image className="max-w-24" src={anime.images.jpg.image_url} alt={anime.title} width={300} height={300} unoptimized={false} />
+                                    </div>
+                                    <div>
+                                        <h2 className="font-bold text-xl">
+                                            {anime.title}
+                                        </h2>
+                                        {anime.type} {anime.episodes ?? 0} episodes
+                                    </div>
+                                    </TableCell>
+                                <TableCell className="text-right">
+                                    <p className="flex justify-end items-center">
+                                        <StarIcon fill="yellow" />
+                                        <span className="ml-4">
+                                            {anime.score ?? "N/A"}
+                                        </span>
+                                    </p>
+                                </TableCell>
+                            </TableRow>
+                        ))}
+                    </TableBody>
+                </Table>
+            </div>
             {/* Botón para cargar más resultados */}
-            {currentPage > 1 && (
-                <button onClick={() => loadNextPage(currentPage - 1)} >
-                    Previus page
-                </button>
-            )}
-            {topAnimes.pagination.has_next_page && (
-                <button onClick={() => loadNextPage(topAnimes.pagination.current_page + 1)} >
-                    Next page
-                </button>
-            )}
+            <div>
+                <TopAnimePagination
+                    setCurrentPage={setCurrentPage}
+                    topAnimesData={topAnimes}
+                />
+            </div>
         </div>
     );
 }

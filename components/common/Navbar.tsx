@@ -64,7 +64,7 @@ export default function Navbar() {
                                 )
                             }
                             {openSubmenu === index && (
-                                <ul className="absolute top-14 bg-slate-400 z-10">
+                                <ul className="absolute top-14 bg-slate-400 z-20">
                                     {
                                         menu.childs?.map((subMenu, subIndex) => (
                                             <li key={subIndex}>
