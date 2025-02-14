@@ -3,6 +3,10 @@ export const truncateText = (text: string, maxLength: number) => {
     return text.length > maxLength ? text.substring(0, maxLength) + "..." : text;
 }
 
+export const truncateTextV2 = (text: string, maxLength: number) => {
+    return text.length > maxLength ? text.substring(0, maxLength) + "<span>...</span>" + "<span class='hidden'>"+ text.substring(maxLength) + "</span>": text;
+}
+
 // Esta funcion formatea la fecha que le pases
 export const formatDate = (dateString: string): string => {
     const date = new Date(dateString);

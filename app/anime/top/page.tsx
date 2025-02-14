@@ -17,6 +17,7 @@ import {
 } from "@/components/ui/table"
 import { StarIcon } from "lucide-react";
 
+// INFORMACION IMPORTANTE, HAY QUE ARREGLAR EL TEMA DE FILTROS RANDOM QUE PUEDAN PONER QUE ROMPE LOS ACTIVE SI PONGO UNO RANDOM
 
 export default function Page() {
     const [topAnimes, setTopAnimes] = useState<TopAnimeApiResponse | null>(null);
@@ -71,12 +72,11 @@ export default function Page() {
             </div>
             <div>
                 <Table>
-                    {/* <TableCaption>A list of your recent invoices.</TableCaption> */}
                     <TableHeader>
-                        <TableRow>
-                            <TableHead className="w-[100px]">Rank</TableHead>
-                            <TableHead>Title</TableHead>
-                            <TableHead className="text-right">Score</TableHead>
+                        <TableRow className="text-xl">
+                            <TableHead className="w-[100px] font-bold">Rank</TableHead>
+                            <TableHead className="font-bold">Title</TableHead>
+                            <TableHead className="text-right font-bold">Score</TableHead>
                         </TableRow>
                     </TableHeader>
                     <TableBody>
@@ -93,7 +93,7 @@ export default function Page() {
                                         </h2>
                                         {anime.type} {anime.episodes ?? 0} episodes
                                     </div>
-                                    </TableCell>
+                                </TableCell>
                                 <TableCell className="text-right">
                                     <p className="flex justify-end items-center">
                                         <StarIcon fill="yellow" />

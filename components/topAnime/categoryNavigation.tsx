@@ -27,9 +27,9 @@ const categories = [
 export default function CategoryNavigation({ setCurrentPage }: { setCurrentPage: (page: number) => void; }) {
     const router = useRouter();
     const searchParams = useSearchParams();
-
-    const handleActiveNavigation = (queryValue: string) => {
-        if (queryValue == searchParams.get('type') || queryValue == searchParams.get('filter') || queryValue == "" && searchParams.has("page")) {
+    
+    const handleActiveNavigation = (queryValue: string) => {     
+        if (queryValue == searchParams.get('type') || queryValue == searchParams.get('filter') || queryValue == "" && searchParams.has("page") && !searchParams.has("filter") && !searchParams.has("type") || queryValue == "" && searchParams.toString() == "") {
             return true
         } else {
             return false

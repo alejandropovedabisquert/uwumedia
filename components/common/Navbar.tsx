@@ -40,7 +40,7 @@ export default function Navbar() {
             setOpenSubmenu(index); // Abre el submenú correspondiente
         }
     };
-
+      
     return (
         <nav>
             <ul className="flex flex-wrap">
@@ -50,7 +50,7 @@ export default function Navbar() {
                             key={index}
                             onMouseEnter={() => handleSubmenuToggle(index)}
                             onMouseLeave={() => handleSubmenuToggle(0 - 1)}
-                            className="relative py-4 px-8 bg-orange-500"
+                            className=" transition-all cursor-pointer relative py-6 px-8 font-bold hover:text-corporative"
                         >
                             {
                                 menu.link ? (
@@ -63,19 +63,17 @@ export default function Navbar() {
                                     </div>
                                 )
                             }
-                            {openSubmenu === index && (
-                                <ul className="absolute top-14 bg-slate-400 z-20">
-                                    {
-                                        menu.childs?.map((subMenu, subIndex) => (
-                                            <li key={subIndex}>
-                                                <Link href={subMenu.link}>
-                                                    {subMenu.text}
-                                                </Link>
-                                            </li>
-                                        ))
-                                    }
-                                </ul>
-                            )}
+                            <ul className={`absolute transition-all left-0 rounded-lg bg-white shadow-md z-10 overflow-hidden ${openSubmenu === index ? `opacity-100 visible top-16` : "opacity-0 invisible top-20"}`}>
+                                {
+                                    menu.childs?.map((subMenu, subIndex) => (
+                                        <li key={subIndex}>
+                                            <Link href={subMenu.link} className="text-black transition-all block py-2 px-4 hover:bg-corporative hover:text-white">
+                                                {subMenu.text}
+                                            </Link>
+                                        </li>
+                                    ))
+                                }
+                            </ul>
                         </li>
                     ))
                 }

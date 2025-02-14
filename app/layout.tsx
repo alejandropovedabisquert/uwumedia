@@ -21,7 +21,7 @@ export default function RootLayout({
       <body
         className={`${GeistSans.className} antialiased`}
       >
-        <header>
+        <header className="border-b-2 border-b-corporative">
           <div className="max-w-screen-2xl m-auto flex flex-wrap justify-between">
             <Link href="/">
               <Image src='/logos/logo-primary.svg' alt="Logo UwUmedia" width={250} height={300} priority unoptimized={true}/>
@@ -29,7 +29,7 @@ export default function RootLayout({
             <Navbar />
           </div>
         </header>
-        <main className="max-w-screen-2xl m-auto">
+        <main className="max-w-screen-2xl m-auto px-4 2xl:px-0">
           {children}
         </main>
       </body>

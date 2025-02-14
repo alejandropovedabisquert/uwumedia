@@ -47,8 +47,9 @@ export default function TopAnimePagination({ setCurrentPage, topAnimesData }: { 
         router.push(url);
     };
 
-    const handleActivePagination = (queryValue: string) => {
-        if (queryValue == searchParams.get('page') || queryValue == "1" && searchParams.size == 0) {
+    const handleActivePagination = (queryValue: string) => { 
+        console.log("segundo filtro", queryValue == "1" && searchParams.size == 1);        
+        if (queryValue == searchParams.get('page') || queryValue == "1" && searchParams.size == 1 && !searchParams.has("page") || queryValue == "1" && searchParams.size == 0) {
             return true
         }
     }

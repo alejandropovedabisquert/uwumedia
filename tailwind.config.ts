@@ -9,20 +9,12 @@ export default {
   ],
   theme: {
   	extend: {
-  		gridTemplateColumns: {
-  			title: '1fr auto 1fr',
-  			'left-side': '.1fr auto 1fr',
-  			'right-side': '1fr auto .1fr'
-  		},
-  		gridTemplateRows: {
-  			title: '16px 0'
-  		},
   		colors: {
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
-  			'primary-color': '#FF844B',
-  			'secondary-color': '#ED9200',
-  			'tertiary-color': '#12C036',
+  			// 'primary-color': '#FF844B',
+  			// 'secondary-color': '#ED9200',
+  			// 'tertiary-color': '#12C036',
   			card: {
   				DEFAULT: 'hsl(var(--card))',
   				foreground: 'hsl(var(--card-foreground))'
@@ -51,6 +43,10 @@ export default {
   				DEFAULT: 'hsl(var(--destructive))',
   				foreground: 'hsl(var(--destructive-foreground))'
   			},
+			corporative:{
+				DEFAULT: 'hsl(var(--corporative))',
+				foreground: 'hsl(var(--corporative-foreground))'
+			},
   			border: 'hsl(var(--border))',
   			input: 'hsl(var(--input))',
   			ring: 'hsl(var(--ring))',
